@@ -34,11 +34,6 @@ public class Serie {
 	private Integer anoFim;
 	
 	
-	
-	@OneToMany(mappedBy = "serie", cascade=CascadeType.ALL, orphanRemoval = true)
-	@JsonManagedReference
-	private List<Personagem> personagens;
-	
 
 	public Serie() {
 		super();
@@ -47,14 +42,12 @@ public class Serie {
 
 	
 
-	public Serie(Integer id, @NotNull String nome, @NotNull Integer anoInicio, Integer anoFim,
-			List<Personagem> personagens) {
+	public Serie(Integer id, @NotNull String nome, @NotNull Integer anoInicio, Integer anoFim) {
 		super();
 		this.id = id;
 		this.nome = nome;
 		this.anoInicio = anoInicio;
 		this.anoFim = anoFim;
-		this.personagens = personagens;
 	}
 
 
@@ -75,10 +68,7 @@ public class Serie {
 		return anoFim;
 	}
 
-	public List<Personagem> getPersonagens() {
-		return personagens;
-	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -87,7 +77,6 @@ public class Serie {
 		result = prime * result + ((anoInicio == null) ? 0 : anoInicio.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((personagens == null) ? 0 : personagens.hashCode());
 		return result;
 	}
 
@@ -119,11 +108,6 @@ public class Serie {
 			if (other.nome != null)
 				return false;
 		} else if (!nome.equals(other.nome))
-			return false;
-		if (personagens == null) {
-			if (other.personagens != null)
-				return false;
-		} else if (!personagens.equals(other.personagens))
 			return false;
 		return true;
 	}
