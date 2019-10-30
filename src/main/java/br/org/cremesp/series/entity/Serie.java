@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -42,6 +43,9 @@ public class Serie {
 	private Integer anoInicio;
 
 	private Integer anoFim;
+	
+	@Transient
+	private Usuario autorCompleto;
 
 	@OneToMany(mappedBy = "serie", cascade = CascadeType.ALL, orphanRemoval = true)
 	@JsonManagedReference
