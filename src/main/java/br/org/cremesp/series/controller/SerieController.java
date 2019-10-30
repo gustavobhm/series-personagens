@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.org.cremesp.series.entity.Serie;
+import br.org.cremesp.series.entity.SerieDTO;
 import br.org.cremesp.series.exception.BadRequestException;
 import br.org.cremesp.series.service.SerieService;
 
@@ -23,30 +24,31 @@ public class SerieController {
 
 	@Autowired
 	private SerieService serieService;
-	 
+
 	@PostMapping
 	public void add(@RequestBody Serie serie) throws BadRequestException {
 		serieService.add(serie);
 	}
-	
+
 	@PutMapping
 	public void update(@RequestBody Serie serie) throws BadRequestException {
 		serieService.update(serie);
 	}
-	/*/series?ano=2010*/
+
+	/* /series?ano=2010 */
 	@GetMapping
-	public List<Serie> getAll(@RequestParam(value="ano-inicio", required=false) Integer anoInicio){
+	public List<Serie> getAll(@RequestParam(value = "ano-inicio", required = false) Integer anoInicio) {
 		return serieService.getAll(anoInicio);
 	}
-	
+
 	@GetMapping("/{id}")
-	public Serie get(@PathVariable Integer id) throws BadRequestException {
+	public SerieDTO get(@PathVariable Integer id) throws BadRequestException {
 		return serieService.get(id);
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void delete(@PathVariable Integer id) {
 		serieService.delete(id);
 	}
-	
+
 }

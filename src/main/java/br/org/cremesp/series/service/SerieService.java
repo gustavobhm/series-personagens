@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import br.org.cremesp.series.client.UsuarioClient;
 import br.org.cremesp.series.entity.Serie;
+import br.org.cremesp.series.entity.SerieDTO;
 import br.org.cremesp.series.entity.Usuario;
 import br.org.cremesp.series.exception.BadRequestException;
 import br.org.cremesp.series.repository.SerieRepository;
@@ -42,13 +43,14 @@ public class SerieService {
 			return this.serieRepository.findByAnoInicio(anoInicio);
 	}
 
-	public Serie get(Integer id) throws BadRequestException {
+	public SerieDTO get(Integer id) throws BadRequestException {
 		try {
 
 			Serie serie = this.serieRepository.findById(id).get();
 			Usuario autor = this.usuarioClient.getByIdentificacao(serie.getAutor());
-			serie.setAutorCompleto(autor);
-			return serie;
+			SerieDTO serieDTO = new SerieDTO(serie,autor);
+
+			return serieDTO;
 		} catch (NoSuchElementException e) {
 			throw new BadRequestException("Não existe série para o identificador informado");
 		}

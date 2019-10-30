@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import br.org.cremesp.series.entity.Usuario;
 
-@FeignClient(name = "usuarios", url = "http://dk01.cremesp.org.br:8000/usuarios")
+@FeignClient(name = "usuarios", url = "${cremesp.config.usuario-url}")
 public interface UsuarioClient {
 
 	@GetMapping("/{identificacao}")
